@@ -244,7 +244,11 @@ class ChooseCharacters extends Component {
               </div>
             </div>
           </div>
-          <div className="col-sm-3 col-xs-12 pull-right">
+          <div className="col-sm-2 col-xs-12 pull-right">
+            <span className="pull-right audio">Audio &nbsp;
+              <Switch onClick={()=>this.props.toggleAudio()} on={this.props.audioOn}/></span>
+          </div>         
+          <div className="col-sm-4 col-xs-12 pull-right">
             <span className="pull-right lock">Lock to stage &nbsp;
               {
                 this.props.isLocked &&

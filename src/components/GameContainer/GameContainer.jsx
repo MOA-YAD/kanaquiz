@@ -7,12 +7,13 @@ class GameContainer extends Component {
   state = {
     stage:1,
     isLocked: false,
-    decidedGroups: JSON.parse(localStorage.getItem('decidedGroups') || null) || []
+    decidedGroups: JSON.parse(localStorage.getItem('decidedGroups') || null) || [],
   }
 
   componentWillReceiveProps() {
     if(!this.state.isLocked)
       this.setState({stage: 1});
+    this.audioOn = this.props.audioOn;
   }
 
   startGame = decidedGroups => {
@@ -47,6 +48,8 @@ class GameContainer extends Component {
               stage={this.state.stage}
               isLocked={this.state.isLocked}
               lockStage={this.lockStage}
+              audioOn={this.props.audioOn} 
+              toggleAudio={this.props.toggleAudio} 
             />
           }
           { this.props.gameState==='game' &&
@@ -56,6 +59,8 @@ class GameContainer extends Component {
                 stage={this.state.stage}
                 isLocked={this.state.isLocked}
                 lockStage={this.lockStage}
+                audioOn={this.props.audioOn} 
+                toggleAudio={this.props.toggleAudio} 
               />
           }
         </div>

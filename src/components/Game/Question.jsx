@@ -4,6 +4,8 @@ import { quizSettings } from '../../data/quizSettings';
 import { findRomajisAtKanaKey, removeFromArray, arrayContains, shuffle, cartesianProduct } from '../../data/helperFuncs';
 import './Question.scss';
 
+const audioPath = '../src/audio/female/';
+
 class Question extends Component {
   state = {
     previousQuestion: [],
@@ -263,6 +265,12 @@ class Question extends Component {
 }
 
 class AnswerButton extends Component {
+  playAudio() {
+    if(this.props.audioOn) {
+      let audio = new Audio('src/assets/audio/female/'+this.props.answer+'.mp3');
+      audio.play();
+    }
+  }
   getShowableAnswer() {
     if(this.props.answertype=='romaji')
       return findRomajisAtKanaKey(this.props.answer, kanaDictionary)[0];
@@ -271,7 +279,14 @@ class AnswerButton extends Component {
 
   render() {
     return (
-      <button className={this.props.className} onClick={()=>this.props.handleAnswer(this.getShowableAnswer())}>{this.getShowableAnswer()}</button>
+      <button className={this.props.className} 
+      onClick={()=> {
+        this.playAudio();
+        this.props.handleAnswer(this.getShowableAnswer())
+        }}
+      >
+        {this.getShowableAnswer()}
+      </button>
     );
   }
 }

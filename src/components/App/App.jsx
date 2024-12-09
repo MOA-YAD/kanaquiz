@@ -7,7 +7,14 @@ import { removeHash } from '../../data/helperFuncs';
 const options = {};
 
 class App extends Component {
-  state = { gameState: 'chooseCharacters' };
+  state = { 
+    gameState: 'chooseCharacters',
+    audioOn: true,
+   };
+
+  toggleAudio = () => {
+    this.setState({audioOn: !this.state.audioOn});
+  };
 
   startGame = () => {
     this.setState({gameState: 'game'});
@@ -16,6 +23,7 @@ class App extends Component {
   endGame = () => {
     this.setState({gameState: 'chooseCharacters'});
   }
+
 
   componentWillUpdate(nextProps, nextState) {
     // This is primarily for demo site purposes. Hides #footer when game is on.
@@ -38,6 +46,8 @@ class App extends Component {
         <Navbar
           gameState={this.state.gameState}
           handleEndGame={this.endGame}
+          toggleAudio={this.toggleAudio} 
+          audioOn={this.state.audioOn}
         />
         <div className="outercontainer">
           <div className="container game">
@@ -45,6 +55,8 @@ class App extends Component {
               gameState={this.state.gameState}
               handleStartGame={this.startGame}
               handleEndGame={this.endGame}
+              toggleAudio={this.toggleAudio} 
+              audioOn={this.state.audioOn}
             />
           </div>
         </div>
